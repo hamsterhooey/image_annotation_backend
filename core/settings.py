@@ -3,6 +3,12 @@ import boto3
 import dotenv
 from pathlib import Path
 
+# Load environment variables
+# Add .env variables anywhere before SECRET_KEY
+dotenv_file = os.path.join(BASE_DIR, "conf", ".env")
+if os.path.isfile(dotenv_file):
+    dotenv.load_dotenv(dotenv_file)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -11,7 +17,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'tm2227oxqyu@qogtg822!80m5l-u$lxcbejw@q3rm(vj-oi@zh'
+SECRET_KEY = os.environ['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -139,10 +145,7 @@ AUTH_USER_MODEL = 'accounts.UserAccount'
 
 # s3 configuration
 
-# Add .env variables anywhere before SECRET_KEY
-dotenv_file = os.path.join(BASE_DIR, "conf", ".env")
-if os.path.isfile(dotenv_file):
-    dotenv.load_dotenv(dotenv_file)
+
 
 # Update secret key
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID'] # Instead of your actual secret key
