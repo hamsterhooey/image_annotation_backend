@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'images',
     'accounts',
+    'storages'
 ]
 
 MIDDLEWARE = [
@@ -123,9 +124,6 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
@@ -145,12 +143,15 @@ AUTH_USER_MODEL = 'accounts.UserAccount'
 
 # s3 configuration
 
-
-
 # Update secret key
 AWS_ACCESS_KEY_ID = os.environ['AWS_ACCESS_KEY_ID'] # Instead of your actual secret key
 AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY'] # Instead of your actual secret key
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 AWS_STORAGE_BUCKET_NAME = 'bermuda-triangle'
 AWS_S3_REGION_NAME = 'us-west-1'
+
+STATIC_URL = '/static/'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
