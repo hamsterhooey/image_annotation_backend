@@ -9,7 +9,7 @@ def image_upload_path(instance, filename):
     return f'{instance.sid}{ext}'
 
 class BaseModel(models.Model):
-    sid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=True)
+    sid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False, unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
     class Meta:
         abstract = True
@@ -28,3 +28,4 @@ class BoundingBox(BaseModel):
 
     def __str__(self):
         return self.code
+
